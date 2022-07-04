@@ -1,0 +1,10 @@
+{
+    "moduleAliases": {
+      "br": {
+        "Demo": {
+          "registry": "acrdevlz.azurecr.io",
+          "modulePath": "bicep"
+        }
+      }
+    }
+  }

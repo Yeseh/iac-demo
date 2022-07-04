@@ -1,0 +1,35 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "dlzTags": {
+            "value": {
+                "Deployment": "Bicep",
+                "Created By": "Jesse Wellenberg (jesse.wellenberg@axians.com)"
+            }
+        },
+        "dlzLocation": {
+            "value": "westeurope"
+        },
+        "project": {
+            "value": "iac-demo"
+        },
+        "dlzAddressSubspace": {
+            "value": "253"
+        },
+        "dlzConfigs": {
+            "value": [
+                {
+                    "project": "iac-demo-westeu",
+                    "addressSubspace": "253",
+                    "location": "westeurope"
+                },
+                {
+                    "project": "iac-demo-northeu",
+                    "addressSubspace": "255",
+                    "location": "northeurope"
+                }
+            ]
+        }
+    }
+}
