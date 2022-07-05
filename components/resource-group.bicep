@@ -5,7 +5,7 @@ targetScope = 'subscription'
   'northeurope'
 ])
 param location string
-@maxLength(15)
+@maxLength(20)
 @minLength(5)
 param rgName string
 param tags object
