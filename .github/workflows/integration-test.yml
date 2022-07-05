@@ -1,0 +1,23 @@
+name: Pester
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  integration-tests:
+    runs-on: windows-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        enable-AzPSSession: true
+
+    - name: Run Pester tests
+      run: |
+        Set-PSRepository psgallery -InstallationPolicy trusted
+        Install-Module -Name Pester -RequiredVersion 5.3.3 -Confirm:$false -Force
+        Invoke-Pester -Path "tests"        
+      shell: pwsh
