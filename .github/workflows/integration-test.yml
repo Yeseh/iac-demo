@@ -1,17 +1,21 @@
 name: Integration Tests 
 on:
-  push:
-    workflow_run:
-      workflows: ["Deploy Infrastructure"]
-      branches: [main]
-      types: 
-        - completed
+  workflow_run:
+    workflows: ["Deploy Infrastructure"]
+    branches: [main]
+    types: 
+      - completed
 
 jobs:
-  integration-tests:
-    runs-on: windows-latest
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
-
+      - run: echo 'The triggering workflow failed'
+  on-success:
+    runs-on: windows-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
     - uses: actions/checkout@v2
 
     - uses: azure/login@v1
@@ -19,7 +23,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         enable-AzPSSession: true
 
-    - name: publish 
+    - name: Run Tests 
       uses: azure/powershell@v1
       with: 
         inlineScript: |
