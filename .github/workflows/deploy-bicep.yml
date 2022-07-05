@@ -14,6 +14,7 @@ jobs:
         uses: azure/arm-deploy@v1
         with: 
           scope: subscription
+          region: westeurope
           subscriptionId: ${{ secrets.AZ_SUBSCRIPTION }}
           template: ./main.bicep
           parameters: parameters.json
