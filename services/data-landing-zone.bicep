@@ -34,6 +34,9 @@ module vnet '../components/vnet.bicep' = {
     ]
     project: project
   }
+  dependsOn: [
+    rg
+  ]
 }
 
 module datalakeStorage '../components/datalake-storage.bicep' = {
@@ -48,6 +51,9 @@ module datalakeStorage '../components/datalake-storage.bicep' = {
     subnetId: vnet.outputs.defaultSnetId
     tags: tags
   }
+  dependsOn: [
+    rg
+  ]
 }
 
 module datafactory '../components/datafactory.bicep' = {
@@ -59,4 +65,7 @@ module datafactory '../components/datafactory.bicep' = {
     tags: tags
     factoryRepoConfig: {}
   }
+  dependsOn: [
+    rg
+  ]
 }
