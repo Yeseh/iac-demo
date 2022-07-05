@@ -7,7 +7,7 @@ on:
       - completed
 
 jobs:
-  - build-and-deploy:
+  - publish-registry:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
