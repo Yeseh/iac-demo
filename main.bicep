@@ -1,9 +1,9 @@
 targetScope = 'subscription'
 
-// param dlzAddressSubspace strinjg
-// param dlzLocation string
+param dlzAddressSubspace string
+param dlzLocation string
 param dlzTags object
-param dlzConfigs array
+// param dlzConfigs array
 param project string
 param deploymentName string = newGuid()
 
@@ -19,25 +19,26 @@ param deploymentName string = newGuid()
 //   }
 // }
 
-// module dlz 'br/Demo:services/data-landing-zone:latest' = {
-//   scope: subscription()
-//   name: 'DataLandingZone'
-//   params: {
-//     addressSubspace: dlzAddressSubspace
-//     location: dlzLocation
-//     project: project
-//     tags: dlzTags
-//   }
-// }
-
-module dlzLoop 'br/Demo:services/data-landing-zone:latest' = [for config in dlzConfigs: {
+module dlz 'br/Demo:services/data-landing-zone:latest' = {
   scope: subscription()
-  name: '${config.name}-${deploymentName}'
+  name: deploymentName 
   params: {
-    addressSubspace: config.addressSubspace
-    location: config.location 
+    addressSubspace: dlzAddressSubspace
+    location: dlzLocation
     project: project
-    tags: dlzTags 
+    tags: dlzTags
     dlzRgName: 'rg-${project}'
   }
-}]
+}
+
+// module dlzLoop 'br/Demo:services/data-landing-zone:latest' = [for config in dlzConfigs: {
+//   scope: subscription()
+//   name: '${config.name}-${deploymentName}'
+//   params: {
+//     addressSubspace: config.addressSubspace
+//     location: config.location 
+//     project: project
+//     tags: dlzTags 
+//     dlzRgName: 'rg-${project}'
+//   }
+// }]
