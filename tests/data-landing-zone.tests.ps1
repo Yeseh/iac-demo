@@ -1,5 +1,3 @@
-
-
 Describe "Data Landing Zone Tests" {
     BeforeAll {
         $paramJson = Get-Content "./parameters.json" | Out-String | ConvertFrom-Json
@@ -11,6 +9,7 @@ Describe "Data Landing Zone Tests" {
 
     It "It should create a resource group" {
         $rgName = "rg-${project}"
+
         $rg = Get-AzResourceGroup -Name $rgName 
 
         $rg.ResourceGroupName | Should -Be $rgName

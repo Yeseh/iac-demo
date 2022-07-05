@@ -22,8 +22,8 @@ jobs:
     - name: publish 
       uses: azure/powershell@v1
       with: 
-      inlineScript: |
-        Set-PSRepository psgallery -InstallationPolicy trusted
-        Install-Module -Name Pester -RequiredVersion 5.3.3 -Confirm:$false -Force
-        Invoke-Pester -Path "tests"        
-      azPSVersion: "latest"
+        inlineScript: |
+          Set-PSRepository psgallery -InstallationPolicy trusted
+          Install-Module -Name Pester -RequiredVersion 5.3.3 -Confirm:$false -Force
+          Invoke-Pester -Path "tests"        
+        azPSVersion: "latest"
