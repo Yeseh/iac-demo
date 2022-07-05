@@ -1,7 +1,11 @@
-name: Pester
+name: Integration Tests 
 on:
   push:
-    branches: [ main ]
+    workflow_run:
+      workflows: ["Deploy Infrastructure"]
+      branches: [main]
+      types: 
+        - completed
 
 jobs:
   integration-tests:
@@ -15,9 +19,11 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         enable-AzPSSession: true
 
-    - name: Run Pester tests
-      run: |
+    - name: publish 
+      uses: azure/powershell@v1
+      with: 
+      inlineScript: |
         Set-PSRepository psgallery -InstallationPolicy trusted
         Install-Module -Name Pester -RequiredVersion 5.3.3 -Confirm:$false -Force
         Invoke-Pester -Path "tests"        
-      shell: pwsh
+      azPSVersion: "latest"
