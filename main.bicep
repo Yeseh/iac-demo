@@ -5,10 +5,11 @@ param dlzLocation string
 param dlzTags object
 // param dlzConfigs array
 param project string
+param deploymentName string = newGuid()
 
 module dlz './services/data-landing-zone.bicep' = {
   scope: subscription()
-  name: 'DataLandingZone'
+  name: deploymentName 
   params: {
     addressSubspace: dlzAddressSubspace
     location: dlzLocation

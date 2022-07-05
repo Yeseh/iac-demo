@@ -2,7 +2,7 @@
     "moduleAliases": {
       "br": {
         "Demo": {
-          "registry": "acrdevlz.azurecr.io",
+          "registry": "sandboxjesse.azurecr.io",
           "modulePath": "bicep"
         }
       }

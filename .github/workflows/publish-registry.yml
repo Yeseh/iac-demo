@@ -4,7 +4,7 @@
 
 name: Publish Bicep Registry
 jobs:
-  build-and-deploy:
+  publish-bicep-modules:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
