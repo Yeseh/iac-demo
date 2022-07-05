@@ -1,0 +1,21 @@
+﻿on:
+  push:
+    branches: [main]
+
+name: Publish Bicep Registry
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          enable-AzPSSession: true
+
+      - name: publish 
+        uses: azure/powershell@v1
+        with: 
+          inlineScript: ./publish-registry.ps1 -Registry ${{ secrets.AZ_REGISTRY }}
+          azPSVersion: "latest"

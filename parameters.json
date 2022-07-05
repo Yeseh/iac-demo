@@ -12,7 +12,7 @@
             "value": "westeurope"
         },
         "project": {
-            "value": "iac-demo"
+            "value": "axians-iac-demo"
         },
         "dlzAddressSubspace": {
             "value": "253"

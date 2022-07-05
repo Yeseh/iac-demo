@@ -4,7 +4,6 @@ Param (
 
 Connect-AzContainerRegistry -Name $Registry
 
-
 Get-Childitem $PSScriptRoot -Filter *.bicep -Recurse -Exclude 'main.bicep' | ForEach-Object {
     $fullPath = $_.FullName
     $subPath = $_.FullName.Replace($PSScriptRoot, "")

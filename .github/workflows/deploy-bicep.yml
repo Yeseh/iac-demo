@@ -1,7 +1,13 @@
-﻿on: [push]
-name: Azure ARM
+﻿name: Deploy Infrastructure
+on:
+  workflow_run:
+    workflows: ["Publish Bicep Registry"]
+    branches: [main]
+    types: 
+      - completed
+
 jobs:
-  build-and-deploy:
+  - build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
@@ -13,6 +19,7 @@ jobs:
       - name: deploy
         uses: azure/arm-deploy@v1
         with: 
+          deploymentName: DataLandingZone
           scope: subscription
           region: westeurope
           subscriptionId: ${{ secrets.AZ_SUBSCRIPTION }}
