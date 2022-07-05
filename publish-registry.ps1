@@ -3,14 +3,17 @@ Param (
 )
 
 Connect-AzContainerRegistry -Name $Registry
+$hasError = $false
 
 Get-Childitem $PSScriptRoot -Filter *.bicep -Recurse -Exclude 'main.bicep' | ForEach-Object {
     try {
+        Write-Host $_
         $fullPath = $_.FullName
         $subPath = $_.FullName.Replace($PSScriptRoot, "")
         # TODO: Check linux vs windows paths!
         $subPathParts = $subPath.Split("\")
         $filename = $subPathParts[$subPathParts.Length - 1]
+
 
         $modulePath = $subPath.Replace($filename, "")
         $moduleName = $filename.Replace(".bicep", "")
@@ -24,5 +27,8 @@ Get-Childitem $PSScriptRoot -Filter *.bicep -Recurse -Exclude 'main.bicep' | For
     }
     catch {
         Write-Host "    => Failed to publish $publishTarget" -ForegroundColor Red
+        $hasError = $true
     }
 }
+
+if ($hasError) { throw "One or more modules failed to publish" }
