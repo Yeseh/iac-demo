@@ -14,12 +14,6 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
 
-      - name: ls 
-        uses: azure/powershell@v1
-        with: 
-          inlineScript: ls 
-          azPSVersion: "latest"
-
       - name: publish 
         uses: azure/powershell@v1
         with: 

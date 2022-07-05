@@ -30,15 +30,3 @@ module dlz 'br/Demo:services/data-landing-zone:latest' = {
     dlzRgName: 'rg-${project}'
   }
 }
-
-// module dlzLoop 'br/Demo:services/data-landing-zone:latest' = [for config in dlzConfigs: {
-//   scope: subscription()
-//   name: '${config.name}-${deploymentName}'
-//   params: {
-//     addressSubspace: config.addressSubspace
-//     location: config.location 
-//     project: project
-//     tags: dlzTags 
-//     dlzRgName: 'rg-${project}'
-//   }
-// }]

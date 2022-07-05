@@ -16,22 +16,6 @@
         },
         "dlzAddressSubspace": {
             "value": "253"
-        },
-        "dlzConfigs": {
-            "value": [
-                {
-                    "name": "DlzWestEu",
-                    "project": "iac-demo-westeu",
-                    "addressSubspace": "253",
-                    "location": "westeurope"
-                },
-                {
-                    "name": "DlzNorthEu",
-                    "project": "iac-demo-northeu",
-                    "addressSubspace": "255",
-                    "location": "northeurope"
-                }
-            ]
         }
     }
 }
