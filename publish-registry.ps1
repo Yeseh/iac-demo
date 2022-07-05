@@ -7,13 +7,13 @@ $hasError = $false
 
 Get-Childitem $PSScriptRoot -Filter *.bicep -Recurse -Exclude 'main.bicep' | ForEach-Object {
     try {
-        Write-Host $_
         $fullPath = $_.FullName
         $subPath = $_.FullName.Replace($PSScriptRoot, "")
-        # TODO: Check linux vs windows paths!
-        $subPathParts = $subPath.Split("\")
-        $filename = $subPathParts[$subPathParts.Length - 1]
 
+        # Default to Linux path standard for module path parsing
+        $subPath = $subPath.Replace("\", "/")
+        $subPathParts = $subPath.Split("/") 
+        $filename = $subPathParts[$subPathParts.Length - 1]
 
         $modulePath = $subPath.Replace($filename, "")
         $moduleName = $filename.Replace(".bicep", "")
@@ -22,7 +22,7 @@ Get-Childitem $PSScriptRoot -Filter *.bicep -Recurse -Exclude 'main.bicep' | For
         $modulePath = $modulePath.Substring(1, $modulePath.Length - 1).Substring(0, $modulePath.Length - 2).Replace("\", "/")
         $publishTarget = "br:$Registry.azurecr.io/bicep/$modulePath/$moduleName`:$moduleVersion"
 
-        # Publish-AzBicepModule -FilePath $fullPath -Target $publishTarget
+        Publish-AzBicepModule -FilePath $fullPath -Target $publishTarget
         Write-Host "    => Published $publishTarget succesfully!" -ForegroundColor Green
     }
     catch {
