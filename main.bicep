@@ -3,7 +3,7 @@ targetScope = 'subscription'
 param dlzAddressSubspace string
 param dlzLocation string
 param dlzTags object
-param dlzConfigs array
+// param dlzConfigs array
 param project string
 
 module dlz './services/data-landing-zone.bicep' = {
